@@ -34,13 +34,7 @@
 >
 > *The result is **Universal Extractor**—a bridge between static documents and actionable intelligence."*
 
----
 
-## 📸 Sneak Peek
-
-![App Screenshot](https://via.placeholder.com/800x400.png?text=Upload+Your+App+Screenshot+Here)
-
----
 
 ## 🔥 Key Features
 
