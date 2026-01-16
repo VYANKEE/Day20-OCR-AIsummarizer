@@ -1,0 +1,174 @@
+/* --- GOOGLE FONTS & RESET --- */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap');
+
+:root {
+  --bg-dark: #09090b;
+  --bg-card: rgba(30, 30, 46, 0.6);
+  --primary: #00c6ff;
+  --secondary: #bd34fe;
+  --text: #ffffff;
+  --text-muted: #a1a1aa;
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg-dark);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+}
+
+/* --- BACKGROUND GLOWS --- */
+.bg-glow {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  filter: blur(150px);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.3;
+}
+.bg-glow.purple { top: -10%; left: -10%; background: var(--secondary); }
+.bg-glow.blue { bottom: -10%; right: -10%; background: var(--primary); }
+
+/* --- COMMON LAYOUT --- */
+.app-container { min-height: 100vh; width: 100%; }
+.section { 
+  min-height: 80vh; /* Thoda kam kiya taaki scroll jaldi ho */
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  padding: 4rem 2rem;
+}
+.section h2 { font-size: 2.5rem; margin-bottom: 3rem; text-align: center; }
+
+/* --- HERO SECTION --- */
+.hero-content { text-align: center; max-width: 800px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  padding: 8px 16px; border-radius: 50px; margin-bottom: 1.5rem;
+  font-size: 0.9rem; color: var(--primary);
+}
+.title { font-size: 5rem; line-height: 1; margin-bottom: 1.5rem; font-weight: 700; }
+.gradient-text {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.subtitle { font-size: 1.3rem; color: var(--text-muted); margin-bottom: 3rem; line-height: 1.6; }
+.cta-btn {
+  padding: 1rem 3rem; font-size: 1.1rem; font-weight: 600;
+  background: white; color: black; border: none; border-radius: 50px; cursor: pointer;
+}
+
+/* --- NEW: HOW IT WORKS SECTION --- */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  width: 100%; max-width: 1000px;
+}
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 2rem; border-radius: 20px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.step-number {
+  position: absolute; top: -10px; left: -10px;
+  font-size: 5rem; font-weight: 700; color: rgba(255,255,255,0.03);
+  z-index: 0;
+}
+.step-icon { font-size: 3rem; margin-bottom: 1rem; color: var(--primary); z-index: 1; position: relative; }
+.step-card h3 { margin-bottom: 1rem; z-index: 1; position: relative; }
+.step-card p { color: var(--text-muted); z-index: 1; position: relative; }
+
+/* --- TOOL SECTION --- */
+.glass-panel {
+  width: 100%; max-width: 1000px;
+  background: var(--bg-card); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border); border-radius: 24px; padding: 2rem;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.inline-icon { margin-right: 10px; color: var(--primary); }
+.lang-select select {
+  background: rgba(255,255,255,0.1); color: white; border: 1px solid var(--border);
+  padding: 8px 12px; border-radius: 8px; outline: none; cursor: pointer;
+}
+.lang-select select option { color: black; }
+
+/* --- HEAVY ANIMATED UPLOAD ZONE --- */
+.upload-zone {
+  position: relative; /* Zaroori hai scanner ke liye */
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 200px; border: 2px dashed var(--border); border-radius: 16px;
+  cursor: pointer; transition: all 0.3s; overflow: hidden;
+}
+.upload-zone:hover { border-color: var(--primary); background: rgba(0, 198, 255, 0.05); }
+.folder-icon { font-size: 3rem; margin-bottom: 10px; }
+
+/* Scanner Animation Effect */
+.upload-zone.scanning { border-color: var(--primary); }
+.upload-zone.scanning::after {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 50%;
+  background: linear-gradient(180deg, rgba(0, 198, 255, 0.4), transparent);
+  filter: blur(10px);
+  animation: scanDown 1.5s ease-in-out infinite;
+}
+@keyframes scanDown {
+  0% { top: -50%; opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* --- EDITOR & SIDEBAR --- */
+.split-view { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-top: 1rem; }
+.text-editor {
+  width: 100%; height: 400px; background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border); border-radius: 12px; color: white;
+  padding: 1.5rem; font-size: 1rem; line-height: 1.6; resize: none; font-family: monospace;
+}
+.ai-sidebar { display: flex; flex-direction: column; gap: 1rem; }
+
+/* --- HEAVY ANIMATED AI BUTTON --- */
+.ai-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 1rem; background: linear-gradient(135deg, #bd34fe, #41295a);
+  border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer;
+  transition: all 0.3s;
+}
+/* Pulse Animation Effect */
+.ai-btn.pulsing {
+  animation: pulse-purple 1.5s infinite;
+  background: linear-gradient(135deg, #9c27b0, #6a1b9a);
+}
+@keyframes pulse-purple {
+  0% { box-shadow: 0 0 0 0 rgba(189, 52, 254, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(189, 52, 254, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(189, 52, 254, 0); }
+}
+
+.summary-box {
+  background: rgba(0, 255, 157, 0.05); border: 1px solid rgba(0, 255, 157, 0.2);
+  padding: 1rem; border-radius: 12px;
+}
+.summary-content { font-size: 0.9rem; margin-top: 10px; color: #d1d5db; white-space: pre-wrap; }
+
+/* --- UTILS --- */
+.loader-wrapper { margin: 1.5rem 0; text-align: center; overflow: hidden; }
+.progress-track { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 10px; }
+.progress-fill { height: 100%; background: var(--primary); border-radius: 10px; }
+.spin { animation: spin 1s linear infinite; }
+.toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.actions button { background: none; border: 1px solid var(--border); color: white; padding: 8px; border-radius: 8px; margin-left: 10px; cursor: pointer; }
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@media (max-width: 768px) {
+  .title { font-size: 3rem; }
+  .split-view { grid-template-columns: 1fr; }
+  .section h2 { font-size: 2rem; }
+}
